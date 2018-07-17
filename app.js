@@ -9,7 +9,12 @@ var index = require('./routes/index');
 //var users = require('./routes/users');
 
 var app = express();
-app.user('/', index);
+function crossDomain (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	next();
+}
+app.use(crossDomain);
+app.use('/', index);
 
 //====================================================================以下为express自带内容，全部去掉
 /*
